@@ -1,7 +1,7 @@
 def main():
     wszystkie = []
     prime_numbers = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
-    przegrywy = [1]
+    przegrywy = []
     wygrywy = []
     first = False
     second = False
@@ -13,14 +13,22 @@ def main():
 
     for j in range(1, 101):
         print(wszystkie[j], end=": ")
-        if wszystkie[j]-1 in prime_numbers: #jesli liczba mniejsza o 1 jest prime to ja wypisz
-            print(wszystkie[j]-1, end="")
-            wygrywy.append(wszystkie[j])
-            first = True
+
+        for k in range(len(przegrywy), 0, -1):
+            if wszystkie[j]-przegrywy[k-1] in prime_numbers: #jesli liczba mniejsza o 1 jest prime to ja wypisz
+                print(wszystkie[j]-przegrywy[k-1], end="")
+                wygrywy.append(wszystkie[j])
+                first = True
+                if first and not third:
+                    print(" ", end="")
+                    fourth = True
+
+
+
 
         if wszystkie[j] in prime_numbers: #jesli ta liczba jest prime to ja wypisz
-            if first:
-                print(",", wszystkie[j])
+            if first and not fourth:
+                print("", wszystkie[j])
             else:
                 print(wszystkie[j])
             wygrywy.append(wszystkie[j])
@@ -40,10 +48,13 @@ def main():
             print("")
 
 
+
         first = False
         second = False
         third = False
-        fourth = True
+        fourth = False
+
+
 
 
 main()
